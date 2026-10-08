@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>外交交渉シミュレーター：国境線を引け！</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>外交交渉シミュレーター：国境線を引け！</h1>
+  <p id="turnInfo"></p>
+</header>
 
+<section id="intro" class="panel">
+  <h2>ミッション</h2>
+  <p id="missionText"></p>
+  <p class="hint">ルール：カードを選ぶ → 結果を予想する → 実行。予想が当たるほど「外交眼」が育つ。</p>
+  <button id="startBtn" class="primary">ミッション開始</button>
+</section>
+
+<main id="game" hidden>
+  <div class="mapwrap">
+    <svg id="map" viewBox="0 0 600 400" role="img" aria-label="東アジアの地図">
+      <rect width="600" height="400" class="sea"/>
+      <path id="china" class="land" d="M0 0H250L270 70L240 150L270 230L230 300L120 330L0 330Z"/>
+      <path id="korea" class="land" d="M290 60L340 40L365 90L350 170L322 200L305 150Z"/>
+      <path id="japan" class="land" d="M450 20L520 60L555 140L500 230L450 250L470 170L440 100Z"/>
+      <g id="ryukyu"><circle cx="395" cy="318" r="9" class="land"/><circle cx="420" cy="342" r="7" class="land"/><circle cx="372" cy="296" r="6" class="land"/></g>
+      <path id="fence" d="M410 10C420 80 395 150 418 215C428 250 395 270 360 285C330 300 345 345 380 370"/>
+      <text x="110" y="150" class="lbl">清</text>
+      <text x="318" y="125" class="lbl sm">朝鮮</text>
+      <text x="492" y="150" class="lbl">日本</text>
+      <text x="340" y="355" class="lbl sm">琉球</text>
+      <text x="290" y="395" class="cap" id="mapCap"></text>
+    </svg>
+    <p class="mapnote">点線＝ふんわりした朝貢の境界／実線＝近代的な国境（フェンス）</p>
+  </div>
+
+  <div class="gauges" id="gauges"></div>
+
+  <div class="cards-area">
+    <h2>外交カード</h2>
+    <div class="cards" id="cards"></div>
+  </div>
+
+  <div id="predict" class="panel" hidden>
+    <h3 id="pTitle"></h3>
+    <p id="pDesc"></p>
+    <div class="predrow"><span>清の怒りは？</span><div class="opts" data-key="qing"></div></div>
+    <div class="predrow"><span>欧米の評価は？</span><div class="opts" data-key="west"></div></div>
+    <div class="btnrow"><button id="runBtn" class="primary" disabled>予想して実行</button><button id="cancelBtn">やめる</button></div>
+  </div>
+
+  <div id="result" class="panel" hidden></div>
+  <ol id="log" class="log"></ol>
+</main>
+
+<section id="endPanel" class="panel" hidden></section>
+
+<section class="reflect">
+  <h2>振り返り</h2>
+  <details><summary>Q1. 軍艦を送ると国内の士族は喜ぶが、清はどう反応した？</summary>
+    <textarea rows="3" placeholder="自分の考えを書こう"></textarea>
+    <p class="ans" id="a1"></p></details>
+  <details><summary>Q2. なぜ日本はリスクを冒してまで国境（フェンス）を引く必要があった？</summary>
+    <textarea rows="3" placeholder="自分の考えを書こう"></textarea>
+    <p class="ans" id="a2"></p></details>
+  <details><summary>ペア対話のヒント</summary><ul id="pairs"></ul></details>
+</section>
+<script src="script.js"></script>
+</body>
+</html>
